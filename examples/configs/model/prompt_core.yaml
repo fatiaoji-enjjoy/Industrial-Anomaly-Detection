@@ -1,0 +1,18 @@
+model:
+  class_path: anomalib.models.PromptCore
+  init_args:
+    encoder_name: vit_base_patch14_reg4_dinov3
+    num_categories: 50
+    num_prompts: 4
+    num_inps: 8
+    decoder_depth: 8
+    bottleneck_dropout: 0.2
+
+trainer:
+  max_steps: 5000
+  callbacks:
+    - class_path: lightning.pytorch.callbacks.EarlyStopping
+      init_args:
+        patience: 20
+        monitor: image_AUROC
+        mode: max
